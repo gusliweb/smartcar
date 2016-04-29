@@ -1,7 +1,7 @@
 #include<Smartcar.h>
 
 //implement thermometer left
-
+// author : Shiwei Li and  Wei Li
 
 Car car;
 //attach components
