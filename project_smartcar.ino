@@ -6,7 +6,7 @@
 #include "ultrasonic.h"
 
 
-// author@ shiwei Li, Wei Li
+// author@ shiwei Li, Wei Li, jim Lin
 
 //implement thermometer left
 
