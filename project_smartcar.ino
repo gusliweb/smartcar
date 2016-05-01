@@ -23,6 +23,8 @@ char in;
 // add buzzer
 const int buzzer;
 
+int distance=0;
+
 
 
 void setup() {
@@ -45,7 +47,7 @@ void setup() {
  backObjEncountered=0;
  
 
- int distance=0;
+// int distance=0;
 }
 
 void loop() {
@@ -81,9 +83,11 @@ if(frontIsClear()==false){
         
        }
    
-   
+
  }
 }
+}
+
 //handle serial input if there is any
 void handleInput() {
  switch(in){
