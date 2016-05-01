@@ -20,7 +20,7 @@ SR04 ultrasonicBack;//values
 int speedValue, angle;
 int frontObjEncountered, backObjEncountered;//read input for direction
 char in;
-// wei Li 
+// add buzzer
 const int buzzer;
 
 
@@ -44,7 +44,7 @@ void setup() {
  frontObjEncountered=0;
  backObjEncountered=0;
  
- // wei Li
+
  int distance=0;
 }
 
@@ -60,7 +60,7 @@ if(frontIsClear()==false){
  //car.setAngle(angle);
  //car.setSpeed(speedValue);
  
- // wei Li code block for collusion check
+ //  code block for collusion check
    distance=ultrasonicFront.Ranging(CM);
  //  distance=ultrasonicBack.Ranging(CM);
 
