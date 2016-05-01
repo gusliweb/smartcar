@@ -21,7 +21,7 @@ int speedValue, angle;
 int frontObjEncountered, backObjEncountered;//read input for direction
 char in;
 // add buzzer
-const int buzzer;
+const int buzzer=4;
 
 int distance=0;
 
