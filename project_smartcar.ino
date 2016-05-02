@@ -1,12 +1,19 @@
+#include <Wire.h>
+
+
+
+#include <Ultrasonic.h>
+
 #include <Servo.h>
 
 #include <Smartcar.h>
 
-#include <NewPing.h>
-#include "ultrasonic.h"
+//#include <NewPing.h>
+
+//#include "Ultrasonic.h"
 
 
-// author@ shiwei Li, Wei Li
+
 
 //implement thermometer left
 
@@ -19,8 +26,12 @@ SR04 ultrasonicFront; // define Ultrasonic object
 SR04 ultrasonicBack;//values
 int speedValue, angle;
 int frontObjEncountered, backObjEncountered;//read input for direction
+const int TRIGGER_PIN =6;
+const int ECHO_PIN=5;
+
+
 char in;
-// add buzzer
+// wei Li 
 const int buzzer=4;
 
 int distance=0;
@@ -36,18 +47,18 @@ void setup() {
  encoderRight.begin();
  gyro.begin();
  car.begin(encoderLeft, encoderRight, gyro);
- ultrasonicFront.attach(5, 6);
- ultrasonicBack.attach(7,8);
+ ultrasonicFront.attach(6, 5);
+ ultrasonicBack.attach(10,9);
 
- ultrasonicfront 
+//  ultrasonicfront ;
  in=0;
  speedValue=0;
  angle=0;
  frontObjEncountered=0;
  backObjEncountered=0;
  
-
-// int distance=0;
+ // wei Li
+ //int distance=0;
 }
 
 void loop() {
@@ -57,37 +68,38 @@ if(Serial.available()){
  
 }else{
 if(frontIsClear()==false){  
- //speedValue = 0;
+ speedValue = 0;
  //angle = 0;
  //car.setAngle(angle);
  //car.setSpeed(speedValue);
  
- //  code block for collusion check
-   distance=ultrasonicFront.Ranging(CM);
+ // wei Li code block for collusion check
+   distance=ultrasonicFront.getDistance();
  //  distance=ultrasonicBack.Ranging(CM);
 
        if ( distance>15)
        {
-        speedValue=40;
-        car.setSpeed(speedValue);
         Serial.println(distance);
+        
+        car.setSpeed(speedValue);
+        
         noTone(buzzer);
        }
 
        else
        {
-        speedvalue=0;
-        car.setSpeed(speedValue);
         Serial.println(distance);
+        speedValue=0;
+        car.setSpeed(speedValue);
+        
         tone(buzzer,100);
         
        }
    
-
+   
  }
 }
 }
-
 //handle serial input if there is any
 void handleInput() {
  switch(in){
@@ -138,7 +150,8 @@ if(frontIsClear()==false){
  car.setAngle(angle);
  car.setSpeed(speedValue);
 }
-} // check the distance given by the ultrasonic
+} 
+// check the distance given by the ultrasonic
 //in order to see if the car encounters an object or not in front
 boolean frontIsClear(){
 frontObjEncountered =  ultrasonicFront.getDistance();
