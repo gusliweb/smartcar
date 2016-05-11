@@ -8,11 +8,9 @@
 
 #include <Smartcar.h>
 
-//#include <NewPing.h>
 
-//#include "Ultrasonic.h"
 
-// author@ ShiWei Li, Mika savikko, Wei Li
+// author@ Ggroup 08
 
 
 //implement thermometer left
