@@ -8,9 +8,11 @@
 
 #include <Smartcar.h>
 
+//#include <NewPing.h>
+
+//#include "Ultrasonic.h"
 
 
-// author@ Ggroup 08
 
 
 //implement thermometer left
@@ -30,9 +32,13 @@ const int ECHO_PIN=5;
 
 char in;
 // wei Li 
-const int buzzer=4;
+
 
 int distance=0;
+// set up the active buzzer
+
+int speakerPin = A0;
+int volume=0;
 
 
 
@@ -48,6 +54,7 @@ void setup() {
  ultrasonicFront.attach(6, 5);
  ultrasonicBack.attach(10,9);
 
+
 //  ultrasonicfront ;
  in=0;
  speedValue=0;
@@ -57,11 +64,13 @@ void setup() {
  
  // wei Li
  //int distance=0;
+
+ pinMode (speakerPin, OUTPUT);
 }
 
 void loop() {
-if(Serial.available()){
- in=Serial.read();
+if(Serial3.available()){
+ in=Serial3.read();
  handleInput();
  
 }else{
@@ -78,10 +87,10 @@ if(frontIsClear()==false){
        if ( distance>15)
        {
         Serial.println(distance);
-        
+        speedValue=50;
         car.setSpeed(speedValue);
         
-        noTone(buzzer);
+       
        }
 
        else
@@ -90,10 +99,16 @@ if(frontIsClear()==false){
         speedValue=0;
         car.setSpeed(speedValue);
         
-        tone(buzzer,100);
-        
+       
+      for( volume; volume<255; volume++)
+      {
+       analogWrite (speakerPin, 100);
+       delay (50);
+      }
+     
+       // volume=0;
+     
        }
-   
    
  }
 }
@@ -102,7 +117,7 @@ if(frontIsClear()==false){
 void handleInput() {
  switch(in){
    //go front
- case 'w': if(speedValue<100 && speedValue !=0)
+ case 'f': if(speedValue<100 && speedValue !=0)
               speedValue = speedValue + 10;
               if(speedValue == 0){
                speedValue = 40;
@@ -112,7 +127,7 @@ void handleInput() {
    break;
    
  //go back
- case 's': if(speedValue>-100 && speedValue!=0)
+ case 'b': if(speedValue>-100 && speedValue!=0)
               speedValue = -speedValue;
               if(speedValue == 0){
                speedValue = -40;
@@ -125,7 +140,8 @@ void handleInput() {
            car.setAngle(angle);
            car.setSpeed(speedValue);
  
-  break;  case 'f':  if(angle>-60)
+  break; 
+  case 'l':  if(angle>-60)
               angle = angle - 15;            
            car.setAngle(angle);
            car.setSpeed(speedValue);
@@ -136,7 +152,7 @@ void handleInput() {
   break;//rotate right
  case 'd': car.rotate(80);
   break;//stop
- case 't': speedValue = 0;
+ case 's': speedValue = 0;
            angle = 0;
            car.setAngle(angle);
            car.setSpeed(speedValue);
