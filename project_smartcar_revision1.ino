@@ -68,8 +68,8 @@ void setup() {
 }
 
 void loop() {
-if(Serial.available()){
- in=Serial.read();
+if(Serial3.available()){
+ in=Serial3.read();
  handleInput();
  
 }else{
@@ -85,7 +85,7 @@ if(frontIsClear()==false){
 
        if ( distance>15)
        {
-        Serial.println(distance);
+        Serial3.println(distance);
         speedValue=50;
         car.setSpeed(speedValue);
         
@@ -95,7 +95,7 @@ if(frontIsClear()==false){
 
        else
        {
-        Serial.println(distance);
+        Serial3.println(distance);
         speedValue=0;
         car.setSpeed(speedValue);
         
@@ -275,6 +275,8 @@ void stop()
            car.setAngle(angle);
 
            car.setSpeed(speedValue);
+
+           break;
 
 
 }
