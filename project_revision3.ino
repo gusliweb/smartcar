@@ -44,6 +44,8 @@ void setup() {
   ultrasonicFront.attach(6, 5);
   ultrasonicBack.attach(10,9); 
   pinMode (speakerPin, OUTPUT);
+  // attach the temperature sensor 
+  pinMode (tempPin, OUTPUT); 
 
   //ultrasonic
   in=0;
